@@ -1,0 +1,11 @@
+*.pyc
+__pycache__/
+env/
+.vscode/*
+!.vscode/launch.json.dev
+config/*
+!config/odoo.conf.dev
+vendor/*
+!vendor/.gitkeep
+src/*
+!src/.gitkeep

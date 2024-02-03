@@ -1,0 +1,15 @@
+<odoo>
+    <record id="departamento_1" model="inmueble">
+        <field name="name">Departamento: Los olivos en venta</field>
+        <field name="street">MZ A lote C ....</field>
+        <field name="type">departamento</field>
+        <field name="value">100000</field>
+    </record>
+
+    <record id="casa|_1" model="inmueble">
+        <field name="name">Casa: Los Cieneguilla en venta</field>
+        <field name="street">MZ A lote C ....</field>
+        <field name="type">casa</field>
+        <field name="value">560000</field>
+    </record>
+</odoo>

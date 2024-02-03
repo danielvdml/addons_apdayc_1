@@ -1,0 +1,115 @@
+<odoo>
+    <!--Vistas lista de inmuebles-->
+    <record id="view_tree_inmuebles" model="ir.ui.view">
+        <field name="name">view.tree.inmuebles</field>
+        <field name="model">inmueble</field>
+        <field name="priority">15</field>
+        <field name="arch" type="xml">
+            <tree multi_edit="1" decoration-bf="state == 'disponible'"
+                                decoration-info="state == 'alquilado'"
+                                decoration-warning="state == 'vendido'">
+                <field name="name"/>
+                <field name="street" optional="show"/>
+                <field name="type" string="Tipo de inmueble"/>
+                <field name="value" string="Precio" widget="monetary"/>
+                <field name="currency_id" column_invisible="1"/>
+                <field name="owner_id"  optional="hide"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_tree_inmuebles_2" model="ir.ui.view">
+        <field name="name">view.tree.inmuebles</field>
+        <field name="model">inmueble</field>
+        <field name="priority">20</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="street"/>
+                <field name="value"/>
+            </tree>
+        </field>
+    </record>
+    
+    <!--Vistas formulario de inmuebles-->
+    <record id="view_form_inmuebles" model="ir.ui.view">
+        <field name="name">view.form.inmuebles</field>
+        <field name="model">inmueble</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar" />
+                </header>
+                <sheet>
+                    <field name="image" widget="image" class="oe_avatar" />
+                    <div class="oe_title mb24">
+                        <h1>
+                            <field name="name" 
+                                placeholder="Departamento, casa, etc"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="type" widget="radio"/>
+                            <field name="owner_id"/>
+                            <field name="street" 
+                                    placeholder="Dirección ..."/>
+                        </group>
+                        <group>
+                            <field name="value" widget="monetary"/>
+                            <field name="currency_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="description_page" string="Descripción">
+                            <field name="description" placeholder="Anotaciones del inmueble"/>
+                        </page>
+                        <page name="fotos_page" string="Fotos">
+                        </page>
+                        <page name="documentation_page" string="Documentación">
+                        </page>
+                    </notebook>
+                </sheet>
+
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" 
+                            widget="mail_followers" groups="base.group_user"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                    <field name="activity_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!--Vistas busquedad de inmuebles-->
+
+    <record id="view_search_inmueble" model="ir.ui.view">
+        <field name="name">view.search.inmuebles</field>
+        <field name="model">inmueble</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" string="Nombre, Dirección, Propietario" filter_domain="['|',
+                                                                                                '|',('name', 'ilike', self),('street', 'ilike', self),
+                                                                                                ('owner_id', 'ilike', self)]"/> 
+            </search>
+        </field>
+    </record>
+
+
+    <!--Acción de ventana de inmuebles-->
+    
+    <record id="action_view_inmuebles" model="ir.actions.act_window">
+        <field name="name">Inmuebles</field>
+        <field name="res_model">inmueble</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    
+    <!-- Menu de inmuebles -->
+    <menuitem
+        id="menu_main_inmobiliario"
+        name="Inmobiliario"
+        action="action_view_inmuebles"
+        sequence="10"/>
+
+</odoo>
