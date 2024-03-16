@@ -9,8 +9,11 @@ class ResCurrency(models.Model):
 
     @api.model
     def action_cron_update_exchange_rate_pen_usd(self):
-        ACCESS_KEY = self.env["ir.config_parameter"].get_param("APIMIGO_ACCESS_KEY")
-        service = ApimigoService(ACCESS_KEY)
+        #ACCESS_KEY = self.env["ir.config_parameter"].get_param("APIMIGO_ACCESS_KEY")
+        #service = ApimigoService(ACCESS_KEY)
+
+        service = self.env.user_id.company_id.instance_apimigo_service()
+
         exchange_latest = service.request_exchange_latest()
 
         currency_usd = self.env.ref("base.USD")
@@ -34,8 +37,11 @@ class ResCurrency(models.Model):
         if currency_usd != self:
             raise UserError("Este método solo es para la moneda USD")
         
-        ACCESS_KEY = self.env["ir.config_parameter"].get_param("APIMIGO_ACCESS_KEY")
-        service = ApimigoService(ACCESS_KEY)
+        #ACCESS_KEY = self.env["ir.config_parameter"].get_param("APIMIGO_ACCESS_KEY")
+        #service = ApimigoService(ACCESS_KEY)
+        
+        service = self.env.user_id.company_id.instance_apimigo_service()
+
         result_exchanges_date = service.request_exchange('2023-01-01','2023-05-31')
 
         if result_exchanges_date.get("success",False):

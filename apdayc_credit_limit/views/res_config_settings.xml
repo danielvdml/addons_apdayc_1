@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="res_config_settings_view_form_inherit" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.creditlimit</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="sale.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//block[@id='pricing_setting_container']" position="after">
+                <block title="Límite de crédito" name="creditlimit">
+                    <settings>
+                        <label for="default_creditlimit" string="Máximo"/>
+                        <field name="default_creditlimit" />
+                        
+                        <label for="def_creditlimit" string="Máximo**"/>
+                        <field name="def_creditlimit" />
+                    </settings>
+                </block>
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>

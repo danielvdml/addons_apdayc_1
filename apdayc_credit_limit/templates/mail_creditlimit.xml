@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="mail_template_creditlimit" model="mail.template">
+        <field name="name">Notificación de cambio de límite de crédito</field>
+        <field name="model_id" ref="base.model_res_partner"/>
+        <field name="subject">Estimado  {{object.name}}, Su límite de cedito ha sido actualizado</field>
+        <field name="email_to">{{object.email}}</field>
+        <field name="body_html" type="html">
+
+<div style="max-width: 600px; margin: 20px auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px;">
+    <h2 style="color: #333;">¡Actualización Exitosa de su Crédito!</h2>
+    <p style="margin-bottom: 20px; color: #666;">Estimado/a <t t-out="object.name">Daniel Moreno</t>,
+    </p>
+    <p style="margin-bottom: 20px; color: #666;">Espero que este mensaje le Daniel Morenoencuentre bien. Nos complace informarle que su crédito ha sido actualizado con éxito en nuestra base de datos. Esta actualización refleja los siguientes detalles:</p>
+    <ul style="margin-bottom: 20px;">
+        <li>
+            <strong>Nuevo Límite de Crédito:</strong>
+            <t t-out="object.creditlimit">5000</t>.
+        </li>
+    </ul>
+    <p style="margin-bottom: 20px; color: #666;">Queremos recordarle que mantener un historial crediticio positivo es fundamental para seguir disfrutando de los beneficios de nuestros servicios. Si tiene alguna pregunta o inquietud sobre su crédito actualizado, no dude en ponerse en contacto con nuestro equipo de atención al cliente. Estaremos encantados de asistirle.</p>
+    <p style="margin-bottom: 20px; color: #666;">Agradecemos su confianza en nuestros servicios y esperamos seguir siendo su socio de confianza en el futuro.</p>
+    <p style="font-style: italic; color: #999;">
+        </p><p>¡Saludos cordiales!</p>
+        <br/>
+        <t t-out="object.user_id.name or ''">Admin</t>
+        <br/>
+        <t t-out="object.user_id.function  or ''">CEO</t>
+        <br/>
+        <t t-out="object.company_id.name  or ''">Compañía</t>
+        <br/>
+        <t t-out="object.user_id.phone  or ''">90999999</t>
+    <p></p>
+</div>
+
+        </field>
+    </record>
+
+</odoo>
