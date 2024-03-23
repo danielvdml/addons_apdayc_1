@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_reporte_inmobiliario" model="ir.actions.report">
+        <field name="name">Ficha de Inmueble</field>
+        <field name="model">inmueble</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">inmobiliario.report_inmueble</field>
+        <field name="report_file">inmobiliario.report_inmueble</field>
+        <field name="paperformat_id" ref="inmobiliario.paperformat_a5_custom"/>
+        <field name="binding_model_id" ref="inmobiliario.model_inmueble"/>
+    </record>
+
+    <template id="external_layout_apdayc">
+        <div class="header report_layout_apdayc_header">
+        
+        </div>
+        <div class="article report_layout_apdayc_article">
+            <t t-out="0"/>
+        </div>
+        <div class="footer report_layout_apdayc_footer">
+        
+        </div>
+    </template>
+
+
+    <template id="report_inmueble">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="inmobiliario.external_layout_apdayc">
+                    <div class="container mt-4">
+                        <h1 class="text-center mb-4">Ficha del Inmueble</h1>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="atributo">
+                                    <h2>Nombre:</h2>
+                                    <p><t t-esc="doc.name"/></p>
+                                </div>
+                                <div class="atributo">
+                                    <h2>Tipo de Inmueble:</h2>
+                                    <p><span t-field="doc.type"/></p>
+                                </div>
+                                <div class="atributo">
+                                    <h2>Propietario:</h2>
+                                    <!--<p><t t-out="doc.owner_id.complete_name"/></p>-->
+                                    <p><span t-field="doc.owner_id"/></p>
+                                    <span t-esc="doc.owner_id.email"/>
+                                </div>
+                                <div class="atributo">
+                                    <h2>Ubicación:</h2>
+                                    <p>Ubicación del inmueble aquí</p>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="atributo">
+                                    <h2>Valor:</h2>
+                                    <p><span t-field="doc.value" t-options="{'widget':'monetary','display_currency':doc.currency_id}"/></p>
+                                </div>
+                                <div class="atributo">
+                                    <h2>Moneda:</h2>
+                                    <!--<p><t t-esc="doc.currency_id.name"/></p>-->
+                                    <p><span t-field="doc.currency_id"/></p>
+                                </div>
+                                <div class="atributo">
+                                    <h2>Descripción Resumen:</h2>
+                                    <p>Descripción resumida del inmueble aquí</p>
+                                </div>
+                                <div class="atributo">
+                                    <h2>Estado:</h2>
+                                    <p>Estado del inmueble aquí</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col">
+                                <h2 class="text-center">Fotos:</h2>
+                                <div class="text-center">
+                                    <span t-field="doc.image" t-options="{'widget':'image','class':'img-responsive'}"/>
+                                    <!--<img t-attf-src="/web/image/inmueble/{{doc.id}}/image" class="img-responsive" alt="Imagen del inmueble"/>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

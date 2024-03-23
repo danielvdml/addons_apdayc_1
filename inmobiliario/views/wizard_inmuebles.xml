@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_wizard_inmuebles_form" model="ir.ui.view">
+        <field name="name">apdayc.inmuebles.wizard.form</field>
+        <field name="model">apdayc.inmuebles.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Seleccionar Inmuebles">
+                <group>
+                    <field name="type"/>
+                </group>
+                <footer>
+                    <button name="action_print_report" string="Imprimir" type="object" class="btn-primary"/>
+                    <button string="Cancelar" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    # Crea un wizard para apdayc.inmuebles.wizard con un campo de selección
+    <record id="action_wizard_inmuebles" model="ir.actions.act_window">
+        <field name="name">Seleccionar Inmuebles</field>
+        <field name="res_model">apdayc.inmuebles.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_wizard_inmuebles_form"/>
+        <field name="target">new</field>
+    </record>
+
+    # Crea un menú para el wizard donde el padre es menu_main_inmobiliario
+    <menuitem
+        id="menu_wizard_inmuebles"
+        name="Seleccionar Inmuebles"
+        parent="menu_main_inmobiliario"
+        action="action_wizard_inmuebles"
+        sequence="10"/>
+
+</odoo>
