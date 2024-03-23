@@ -14,6 +14,7 @@ Este módulo permite la gestión de ventas,compra y alquiler de inmuebles""",
         "data/inmuebles.xml",
         "views/view_inmuebles.xml",
         "views/wizard_inmuebles.xml",
+        "views/report_inmuebles.xml",
         "reports/paperformat.xml",
         "reports/report_inmobiliario.xml"
     ],

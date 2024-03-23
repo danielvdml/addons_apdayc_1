@@ -53,6 +53,7 @@
                         <group>
                             <field name="type" widget="radio"/>
                             <field name="owner_id"/>
+                            <field name="partner_ids" widget="many2many_tags" string="Interesados"/>
                             <field name="street" 
                                     placeholder="Dirección ..."/>
                         </group>

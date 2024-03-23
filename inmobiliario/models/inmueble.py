@@ -25,3 +25,4 @@ class Inmueble(models.Model):
     description = fields.Text(string="Descripción")
 
 
+    partner_ids = fields.Many2many("res.partner",string="Interesados")
